@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500|Sarabun:400,600,700&display=swap");
+*{
+    outline: 0;
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+}
+.main-body{
+    background:rgba(145, 186, 228, 0.205);
+    
+}
+.user-avater img{
+    border-radius: 20px;    
+}
+.user-info{
+    background: #fff;
+    height: auto;
+    width: 100%;
+    border-radius: 10px;
+    position:sticky;
+    top:0;
+    z-index: 999;
+}
+.user-avater{    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media only screen and (max-width: 1550px) {
+    .user-avater{    
+        flex-direction: column;
+    }
+  }
+@media only screen and (max-width: 992px) {
+    .user-avater{    
+        flex-direction: row;
+    }
+  }
+
+
+.users-name h3{
+    color: black;
+    font-weight: medium;
+    font-size: 28px;
+}
+.contacts p{   
+    color: grey;  
+    font-weight: medium;
+    font-size: 18px;
+}
+.contacts p i{
+    width: 25px;   
+}
+.user-name{
+    padding: 5px;
+}
+.user-name .usera-im{
+    border-radius: 10px;
+    border: 1px dotted grey;   
+}
+.number{
+    font-size: 30px;
+}
+.usera-im i{
+    font-size: 30px;
+}
+.user-para{
+    color: grey;  
+    font-weight: medium;
+    font-size: 18px;
+}
+.submenu ul li{
+    list-style-type: none;
+    display: inline-block;
+    margin-right: 30px;
+    
+}
+.submenu ul li a{
+    text-decoration: none;
+    color: grey;    
+    font-weight: 500;
+    font-size: 16px;
+    position: relative;    
+}
+
+.user-detail{
+    background: #fff;
+    height: auto;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.user-detail-info{
+    border-bottom: 1px solid #cccc;
+}
+
+/* Grid Page Starts */
+.user-image{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+.user-image img{
+    border-radius: 50%;
+}
+.userInfo{
+    margin: 3rem auto 0 ;
+
+}
+.userInfo-text{
+    margin-top: -50px;
+    margin-left: 30px;
+}
+.userInfo-text p{
+   line-height: 15px;
+}
+.userInfo-text h3{
+    color: #000;
+    font-size: 24px;
+    font-weight: 400;    
+    padding-bottom: 20px;
+}
+.user-infoTwo{
+    border-top: 1px solid #ccc;
+}
+.user-infoTwo div p:first-child{
+    font-weight: 500;
+}
+
+.user-name .total-amount{    
+    background-color: #faeba7;
+}
+.user-name .total-paid{
+    background-color: #a8ff9e;
+}
+.user-name .total-due{
+    background-color: #ffbdbd;
+}
+
+
+
+
+
+
+
+.submenu-nav-cont{
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+}
+.submenu-nav-cont .nav .nav-item a.active{
+    color: #333547;
+}
+.submenu-nav-cont .nav .nav-item a:hover{
+    color: #4b5181;
+    text-decoration: none;
+}
+
+.submenu-nav-cont .nav .nav-item a:hover:after{
+    position: absolute;
+    content: "";
+    background: #4b5181;;
+    width: 100%;
+    height: 2px;
+    bottom: 0px;
+    left: 0;
+}
+
+
+.personal-information-table td{
+    border: 1px solid rgb(218, 218, 218);
+}
+
+.user-basic-information-table td a.btn{
+    margin: 2px;
+}
+.user-basic-information-table th,
+.user-installment-history-table th {
+    vertical-align: middle;
+}
+

@@ -1,0 +1,211 @@
+@extends('master.master')
+@section('css')
+<link href="{{asset('assets')}}/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+<link href="{{asset('assets')}}/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+<style>
+    .btn-secondary{
+        background-color: #406b97 !important;
+    }
+</style>
+@endsection
+@section('content')
+<div class="page-content">
+    <div class="container-fluid">
+        @if (Auth::guard('employee')->check() || Auth::guard('admin')->check())
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">All Users</h4>
+                        <p class="card-title-desc">Here you can view all users from the CRM
+                        </p>
+
+                        <div class="table-responsive  scrollbar scrollbar-primary">
+
+                        <table id="datatable-buttons"
+                         class="table table-striped table-bordered dt-responsive wrap datatable-buttons-class"
+                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                            <thead class="text-white">
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>File No</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach ($users as $user)
+                                <tr>
+                                    <td><img src="{{asset('/').$user->member_image}}" alt="" style="height: 50px; width:50px; border-radius:50%;"></td>
+                                    <td>{{$user->member_name}}</td>
+                                    <td>{{$user->file_no}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->phone_no_1}}
+
+                                    <td class="action-col">
+                                        <a href="@if(Auth::guard('super_admin')->check())
+                                            {{route('super_admin.user.profile',$user->id)}} @elseif(Auth::guard('admin')->check())
+                                            {{route('admin.user.profile',$user->id)}} @endif" class="btn btn-success"><i class="fas fa-user-shield"></i>
+                                        </a>
+
+                                        <a href="@if(Auth::guard('super_admin')->check())
+                                            {{route('super_admin.user.edit',$user->id)}} @elseif(Auth::guard('admin')->check())
+                                             {{route('admin.user.edit',$user->id)}} @endif" class="btn btn-warning"><i class="fas fa-edit"></i>
+                                            </a>
+
+                                        <a href="javascript:void(0)" class="btn btn-danger deleteBtn" data-url="@if(Auth::guard('super_admin')->check())
+                                             {{route('super_admin.user.delete',$user->id)}} @elseif(Auth::guard('admin')->check())
+                                              {{route('admin.user.delete',$user->id)}} @endif" ><i class="fas fa-trash"></i>
+                                            </a>
+
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+        @endif
+        @auth('super_admin')
+            @foreach ($crms as $crm)
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{$crm->name}}</h4>
+                            <p class="card-title-desc">Here you can view all users from the CRM
+                            </p>
+
+                            <div class="table-responsive scrollbar scrollbar-primary">  
+                                <table id="datatable-buttons"
+                                class="table table-striped table-bordered dt-responsive wrap datatable-buttons-class"
+                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                    <thead class="">
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>File No</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @php
+                                            $crmUser=App\Models\User::where('crm_id',$crm->id)->get();
+                                        @endphp
+                                        @foreach ($crmUser as $user)
+                                        <tr>
+                                            <td><img src="{{asset('/').$user->member_image}}" alt="" style="height: 50px; width:50px; border-radius:50%;"></td>
+                                            <td>{{$user->member_name}}</td>
+                                            <td>{{$user->file_no}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->phone_no_1}}
+
+                                            <td class="action-col">
+                                                <a href="@if(Auth::guard('super_admin')->check())
+                                                    {{route('super_admin.user.profile',$user->id)}} @elseif(Auth::guard('admin')->check())
+                                                    {{route('admin.user.profile',$user->id)}} @endif" class="btn btn-success"><i class="fas fa-user-shield"></i>
+                                                </a>
+
+                                                <a href="@if(Auth::guard('super_admin')->check())
+                                                    {{route('super_admin.user.edit',$user->id)}} @elseif(Auth::guard('admin')->check())
+                                                    {{route('admin.user.edit',$user->id)}} @endif" class="btn btn-warning"><i class="fas fa-edit"></i>
+                                                    </a>
+
+                                                <a href="javascript:void(0)" class="btn btn-danger deleteBtn" data-url="@if(Auth::guard('super_admin')->check())
+                                                    {{route('super_admin.user.delete',$user->id)}} @elseif(Auth::guard('admin')->check())
+                                                    {{route('admin.user.delete',$user->id)}} @endif" ><i class="fas fa-trash"></i>
+                                                    </a>
+
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+            @endforeach
+        @endauth
+    </div>
+</div>
+@endsection
+@section('script')
+
+<script src="{{asset('assets')}}/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{asset('assets')}}/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('assets')}}/js/pages/datatables.init.js"></script>
+
+<script src="{{asset('assets')}}/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{asset('assets')}}/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+
+<script src="{{asset('assets')}}/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{asset('assets')}}/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="{{asset('assets')}}/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+
+<script src="{{asset('assets')}}/libs/jszip/jszip.min.js"></script>
+<script src="{{asset('assets')}}/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="{{asset('assets')}}/libs/pdfmake/build/vfs_fonts.js"></script>
+
+
+
+
+<script>
+    $(document).ready(function(){
+        $(".deleteBtn").click(function(e) {
+          let  url = $(this).attr('data-url');
+            e.preventDefault()
+            Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                            url: url,
+                            type: 'DELETE',
+                            dataType : 'json',
+                            success : function(res){
+                                Swal.fire( 'Success!', 'Your file has been deleted.', 'success')
+                                setTimeout(function(){
+                                    window.location.reload(1);
+                                }, 2000);
+                            },
+                            error : function(res){
+                                Swal.fire( 'Failed!', 'Somethung went wrong.', 'error')
+                            },
+                    });
+                } else {
+                    Swal.fire('Safe Now!','Your imaginary file is safe :)', 'info')
+                }
+            });
+        });
+
+    });
+
+</script>
+
+@endsection
