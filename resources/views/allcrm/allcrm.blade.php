@@ -79,6 +79,10 @@
                             </div>
                         </form>
                     </div>
+                    <div class="modal-footer px-4">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Add Project</button>
+                    </div>
                 </div>
             </div>
         </div>
